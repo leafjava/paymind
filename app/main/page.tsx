@@ -70,7 +70,7 @@ export default function main() {
             PayMind
           </h1>
           <p className="text-xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed">
-            智能合约交易平台，支持杠杆交易、仓位管理，让您的 DeFi 投资更加高效
+            通过交互式演示深入了解商户、AI Agent和用户在支付流程中的完整体验
           </p>
         </div>
 
@@ -89,8 +89,8 @@ export default function main() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-white mb-2">合约交易</h3>
-                    <p className="text-amber-400 text-sm font-medium">智能合约交易平台</p>
+                    <h3 className="text-2xl font-bold text-white mb-2">商户视角</h3>
+                    <p className="text-amber-400 text-sm font-medium">集成与订单管理流程</p>
                   </div>
                 </div>
                 <div className="flex-1">
@@ -114,7 +114,7 @@ export default function main() {
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center text-amber-400 group-hover:text-amber-300 transition-colors">
-                    <span className="text-base font-medium">开始交易</span>
+                    <span className="text-base font-medium">开始体验</span>
                     <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>

@@ -10,11 +10,7 @@ export default function Footer() {
         <div className="flex flex-col items-center justify-between md:flex-row">
           {/* Logo 和品牌名称 */}
           <div className="flex flex-row items-center max-md:mb-4">
-            <img 
-              src="/support/cina-logo-white.svg" 
-              alt="CINA Logo" 
-              className="w-[36px] h-[36px] object-contain"
-            />
+            <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold">PM</div>
             <div className="ml-4 text-[36px]">Paymind</div>
           </div>
 

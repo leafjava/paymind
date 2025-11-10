@@ -10,11 +10,7 @@ export default function Navbar() {
       <div className="flex flex-row gap-3 items-center">
         {/* Logo 和品牌名称 */}
         <Link href="/" className="flex flex-row items-center gap-2 z-10 mr-3">
-          <img 
-            src="/support/cina-logo-white.svg" 
-            alt="Paymind" 
-            className="h-8 w-8 mr-2 object-contain"
-          />
+          <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold">PM</div>
           <div className="text-xl text-slate-50">Paymind</div>
         </Link>
 
@@ -23,13 +19,13 @@ export default function Navbar() {
           href="/main" 
           className="text-muted-foreground hover:text-foreground hover:cursor-pointer p-2 z-50 text-slate-400 hover:text-slate-50 transition-colors"
         >
-          应用
+          首页
         </Link>
         <Link 
           href="/trading" 
           className="text-muted-foreground hover:text-foreground hover:cursor-pointer p-2 z-50 text-slate-400 hover:text-slate-50 transition-colors"
         >
-          交易
+          流程演示
         </Link>
         {/* <a 
           href="https://cina-beta.dev.isecsp.cn/#/" 
