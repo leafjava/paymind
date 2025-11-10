@@ -7,6 +7,11 @@ import Spline from '@splinetool/react-spline/next';
 // import PartnersSection from '../components/PartnersSection';
 import LogoMarquee from '../../components/logoMarquee';
 import React from 'react'
+import {
+  Store, Bot, User, ChevronLeft, ChevronRight, CreditCard, Wallet, CheckCircle, Clock, XCircle, Copy, Download,
+  Key, ShoppingCart, AlertCircle, Shield, Lock, Zap, RotateCcw, MessageCircle, MessageSquare, Send,
+  User as UserIcon, Bot as BotIcon, Sparkles, Crown, Gift, TrendingUp, ArrowRight, Eye, EyeOff, Download as DownloadIcon
+} from 'lucide-react';
 
 // 禁用静态优化，因为此页面包含动态内容和 3D 场景
 export const dynamic = 'force-dynamic';
@@ -84,9 +89,10 @@ export default function main() {
               <div className="relative z-10 h-full flex flex-col">
                 <div className="flex items-center mb-6">
                   <div className="w-16 h-16 bg-gradient-to-r from-amber-500/80 to-orange-500/80 rounded-2xl flex items-center justify-center mr-6 shadow-lg shadow-amber-500/20">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    {/* <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
+                    </svg> */}
+                    <Store size={48} />
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-white mb-2">商户视角</h3>
@@ -136,9 +142,10 @@ export default function main() {
               <div className="relative z-10 h-full flex flex-col">
                 <div className="flex items-center mb-6">
                   <div className="w-16 h-16 bg-gradient-to-r from-cyan-500/80 to-blue-500/80 rounded-2xl flex items-center justify-center mr-6 shadow-lg shadow-cyan-500/20">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    {/* <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
+                    </svg> */}
+                    <Bot size={48} />
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-white mb-2">Agent视角</h3>
@@ -188,9 +195,10 @@ export default function main() {
               <div className="relative z-10 h-full flex flex-col">
                 <div className="flex items-center mb-6">
                   <div className="w-16 h-16 bg-gradient-to-r from-cyan-500/80 to-blue-500/80 rounded-2xl flex items-center justify-center mr-6 shadow-lg shadow-cyan-500/20">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    {/* <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
+                    </svg> */}
+                    <User size={48} />
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-white mb-2">用户视角</h3>
