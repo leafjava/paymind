@@ -26,7 +26,8 @@ export function PopupAssistant({ isOpen, onClose }: PopupAssistantProps) {
   ]
   
   // 判断是否显示开场白按钮（只有初始消息时显示）
-  const showQuickActions = messages.length === 1 && !isLoading
+  // const showQuickActions = messages.length === 1 && !isLoading
+  const showQuickActions = !isLoading
 
   const handleQuickAction = (actionText: string) => {
     // 点击快速操作按钮时，直接发送对应的消息
