@@ -15,6 +15,8 @@ import {
 import { PopupAssistant } from '@/components/popup-assistant'
 import { FloatingButton } from '@/components/floating-button'
 
+import Spline from '@splinetool/react-spline';
+
 // 禁用静态优化，因为此页面包含动态内容和 3D 场景
 export const dynamic = 'force-dynamic';
 
@@ -84,10 +86,10 @@ export default function main() {
     <div className="min-h-screen bg-black relative overflow-hidden">
       {/* 背景动画效果 */}
       {/* <Poster /> */}
-      {/* <Spline
+      <Spline
         style={{position:'absolute',transform:'scale(2)'}}
         scene="/scene.splinecode" 
-      /> */}
+      />
 
       {/* 10月20日上午添加的酷炫特效 */}
       {/* <Spline
