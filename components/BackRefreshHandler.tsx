@@ -7,13 +7,24 @@ export default function BackRefreshHandler() {
   const pathname = usePathname();
 
   useEffect(() => {
+    // 在 main 页面不自动刷新，以便显示错误用于调试
+    const isMainPage = pathname === '/main';
+    
     // 设置全局错误处理
     const handleError = (event: ErrorEvent) => {
+      if (isMainPage) {
+        console.error('Error detected on main page (not refreshing for debugging):', event.error);
+        return; // 在 main 页面不刷新，让错误显示
+      }
       console.log('Error detected, refreshing page...');
       window.location.reload();
     };
 
     const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
+      if (isMainPage) {
+        console.error('Unhandled promise rejection on main page (not refreshing for debugging):', event.reason);
+        return; // 在 main 页面不刷新，让错误显示
+      }
       console.log('Unhandled promise rejection, refreshing page...');
       window.location.reload();
     };

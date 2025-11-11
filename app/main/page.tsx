@@ -3,7 +3,7 @@ import { useEffect,useState } from 'react';
 import Link from 'next/link';
 import ConnectWallet from '../../components/ConnectWallet';
 import Poster from '../../components/ui/poster/poster';
-import Spline from '@splinetool/react-spline/next';
+// import Spline from '@splinetool/react-spline/next';
 // import PartnersSection from '../components/PartnersSection';
 import LogoMarquee from '../../components/logoMarquee';
 import React from 'react'
@@ -42,14 +42,52 @@ export default function main() {
     }
   }, []);
 
+  // 恢复错误显示，用于调试
+  useEffect(() => {
+    // 保存原始的 console 方法
+    const originalConsoleError = console.error;
+    const originalConsoleWarn = console.warn;
+    
+    // 恢复原始的 console.error，显示所有错误
+    console.error = function(...args) {
+      originalConsoleError.apply(console, args);
+    };
+    
+    // 恢复原始的 console.warn，显示所有警告
+    console.warn = function(...args) {
+      originalConsoleWarn.apply(console, args);
+    };
+
+    // 确保未处理的 Promise 拒绝能够显示
+    const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
+      console.error('Unhandled Promise Rejection:', event.reason);
+      // 不阻止默认行为，让错误显示
+    };
+
+    // 确保全局错误能够显示
+    const handleError = (event: ErrorEvent) => {
+      console.error('Global Error:', event.error);
+      // 不阻止默认行为，让错误显示
+    };
+
+    window.addEventListener('unhandledrejection', handleUnhandledRejection);
+    window.addEventListener('error', handleError);
+
+    // 清理函数
+    return () => {
+      window.removeEventListener('unhandledrejection', handleUnhandledRejection);
+      window.removeEventListener('error', handleError);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
       {/* 背景动画效果 */}
       {/* <Poster /> */}
-      <Spline
+      {/* <Spline
         style={{position:'absolute',transform:'scale(2)'}}
         scene="/scene.splinecode" 
-      />
+      /> */}
 
       {/* 10月20日上午添加的酷炫特效 */}
       {/* <Spline
