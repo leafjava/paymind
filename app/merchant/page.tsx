@@ -10,6 +10,8 @@ import { StatusBadge } from './cpns/StatusBadge/page';
 import { StepNavigator } from '@/components/StepNavigator';
 import { ApiKeyIntegration } from './cpns/ApiKeyIntegration/page';
 import { CreateOrder, Order } from './cpns/CreateOrder/page';
+import { WebhookConfiguration } from './cpns/WebhookConfiguration/page';
+import { OrderManagement } from './cpns/OrderManagement/page';
 
 export default function page(){
   const [step, setStep] = useState(0);
@@ -22,8 +24,8 @@ export default function page(){
     { title: '商户注册', component: <MerchantRegistration data={merchantInfo} onChange={setMerchantInfo} /> },
     { title: '获取API密钥', component: <ApiKeyIntegration apiKey={apiKey} onGenerate={() => setApiKey('sk_live_' + Math.random().toString(36).substr(2, 24))} /> },
     { title: '创建订单', component: <CreateOrder onOrderCreate={(o) => setOrders(prev => [...prev, o])} /> },
-    // { title: 'Webhook配置', component: <WebhookConfiguration webhookUrl={webhookUrl} onChange={setWebhookUrl} onTest={() => alert('测试发送！')} /> },
-    // { title: '订单管理', component: <OrderManagement orders={orders} /> }
+    { title: 'Webhook配置', component: <WebhookConfiguration webhookUrl={webhookUrl} onChange={setWebhookUrl} onTest={() => alert('测试发送！')} /> },
+    { title: '订单管理', component: <OrderManagement orders={orders} /> }
   ];
 
   return (
