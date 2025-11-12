@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react'
+import { useRouter } from 'next/navigation';
 import { MerchantRegistration } from './cpns/MerchantRegistration/page';
 import {
   Store, Bot, User, ChevronLeft, ChevronRight, CreditCard, Wallet, CheckCircle, Clock, XCircle, Copy, Download,
@@ -14,6 +15,7 @@ import { WebhookConfiguration } from './cpns/WebhookConfiguration/page';
 import { OrderManagement } from './cpns/OrderManagement/page';
 
 export default function page(){
+  const router = useRouter();
   const [step, setStep] = useState(0);
   const [merchantInfo, setMerchantInfo] = useState({ name: '', email: '' });
   const [apiKey, setApiKey] = useState('');
@@ -41,7 +43,14 @@ export default function page(){
         <div className="p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">{merchantSteps[step].title}</h3>
           {merchantSteps[step].component}
-          <StepNavigator step={step} total={5} onNext={() => setStep(s => Math.min(4, s + 1))} onPrev={() => setStep(s => Math.max(0, s - 1))} onRestart={() => { setStep(0); setMerchantInfo({ name: '', email: '' }); setApiKey(''); setOrders([]); }} />
+          <StepNavigator 
+            step={step} 
+            total={5} 
+            onNext={() => setStep(s => Math.min(4, s + 1))} 
+            onPrev={() => setStep(s => Math.max(0, s - 1))} 
+            onRestart={() => { setStep(0); setMerchantInfo({ name: '', email: '' }); setApiKey(''); setOrders([]); }} 
+            onComplete={() => router.push('/')}
+          />
         </div>
       </div>
     </div>
