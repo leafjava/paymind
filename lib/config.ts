@@ -120,7 +120,7 @@ export const COZE_CONFIG = {
   API_TOKEN: process.env.NEXT_PUBLIC_COZE_API_TOKEN || 'pat_XUph8jnpqmx82WegBQAhfEHqT9yll9YmE2XjCltmXiCYLKVju3QP7RaQ6kc6B6wH',
   
   // Bot ID
-  BOT_ID: process.env.NEXT_PUBLIC_COZE_BOT_ID || '7571523604597899316',
+  BOT_ID: process.env.NEXT_PUBLIC_COZE_BOT_ID || '7578017691110621230',
   
   // API base URL (without /v3, as the CozeAPI class will add it)
   API_BASE_URL: 'https://api.coze.cn',

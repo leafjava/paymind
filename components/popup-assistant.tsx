@@ -19,10 +19,10 @@ export function PopupAssistant({ isOpen, onClose }: PopupAssistantProps) {
   
   // 开场白按钮选项
   const quickActions = [
-    '支付引导',
-    '支付状态查询',
-    '分润信息展示',
-    '支付策略推荐'
+    '你都支持哪些区块链网络的代币兑换？',
+    '帮我把 0.5 ETH 换成 USDC',
+    '主要功能',
+    'X402 Smart Bundler 还能提供哪些服务？'
   ]
   
   // 判断是否显示开场白按钮（只有初始消息时显示）
