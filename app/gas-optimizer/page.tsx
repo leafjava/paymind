@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
-import { useAccount } from 'wagmi';
+import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
+import { parseEther } from 'viem';
 import ConnectWallet from '../../components/ConnectWallet';
 import { Zap, ArrowRight, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 
@@ -27,6 +28,11 @@ interface OptimizationResult {
 
 export default function GasOptimizer() {
   const { address, isConnected } = useAccount();
+  const { writeContract, data: hash, isPending, error: writeError } = useWriteContract();
+  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
+    hash,
+  });
+  
   const [prompt, setPrompt] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
@@ -34,6 +40,18 @@ export default function GasOptimizer() {
   const [txHash, setTxHash] = useState('');
   
   const CONSULTATION_FEE = '0.5'; // USDC
+  const CONTRACT_ADDRESS = '0xb81173637860c9B9Bf9c20b07d1c270A9A434373' as `0x${string}`;
+  
+  // FundMe 合约 ABI (只需要我们用到的函数)
+  const FUNDME_ABI = [
+    {
+      type: 'function',
+      name: 'paymentConsultationFee',
+      inputs: [],
+      outputs: [],
+      stateMutability: 'payable',
+    },
+  ] as const;
 
   const handleAnalyze = async () => {
     if (!prompt.trim()) {
@@ -72,7 +90,7 @@ export default function GasOptimizer() {
     }
   };
 
-  const handlePayConsultation = async () => {
+  const handlePayConsultation = () => {
     if (!isConnected) {
       alert('请先连接钱包');
       return;
@@ -83,37 +101,46 @@ export default function GasOptimizer() {
       return;
     }
 
-    setLoading(true);
     try {
       console.log('💰 开始支付咨询费...');
       console.log('📊 AI 优化方案:', result);
+      console.log('📤 使用 wagmi 发送交易...');
       
-      // 合约地址
-      const contractAddress = '0xb81173637860c9B9Bf9c20b07d1c270A9A434373';
-      
-      // 调用 paymentConsultationFee 函数
-      const paymentTx = await window.ethereum.request({
-        method: 'eth_sendTransaction',
-        params: [{
-          from: address,
-          to: contractAddress,
-          data: '0xb4cb0352', // paymentConsultationFee() 的函数选择器
-          value: '0x16345785d8a0000', // 0.1 ETH (最小金额)
-        }],
+      // 使用 wagmi 的 writeContract 发送交易
+      writeContract({
+        address: CONTRACT_ADDRESS,
+        abi: FUNDME_ABI,
+        functionName: 'paymentConsultationFee',
+        value: parseEther('0.1'), // 0.1 ETH
       });
       
-      console.log('✅ 支付交易已发送:', paymentTx);
+      console.log('✅ 交易请求已发送到钱包,请在钱包中确认');
       
-      // 支付成功，隐藏支付界面
-      setShowPayment(false);
-      alert('支付成功！现在可以执行兑换了。');
     } catch (error: any) {
       console.error('❌ 支付失败:', error);
       alert(`支付失败: ${error.message || '请重试'}`);
-    } finally {
-      setLoading(false);
     }
   };
+  
+  // 监听交易确认状态
+  if (isConfirmed && showPayment && hash) {
+    console.log('✅ 支付成功! 交易哈希:', hash);
+    setShowPayment(false);
+    setTxHash(hash);
+    alert('✅ 支付成功！\n\n现在可以执行兑换了。');
+  }
+  
+  if (writeError) {
+    console.error('❌ 交易错误:', writeError);
+    const errorMessage = writeError.message || '未知错误';
+    if (errorMessage.includes('User rejected')) {
+      alert('❌ 用户取消了交易');
+    } else if (errorMessage.includes('insufficient funds')) {
+      alert('❌ 余额不足');
+    } else {
+      alert(`❌ 交易失败: ${errorMessage}`);
+    }
+  }
 
   const fetchOptimization = async (userPrompt: string): Promise<OptimizationResult> => {
     // 调用后端 API，后端调用 ChatGPT
